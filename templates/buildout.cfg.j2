@@ -18,7 +18,12 @@ download-cache=../buildout-cache/downloads
 newest = false
 prefer-final = true
 show-picked-versions = true
+allow-picked-versions = false
 versions = versions
+
+plone-series = 5.0
+package-name = ploneorg.core
+package-extras = [test, migration]
 
 find-links =
     http://dist.plone.org
@@ -82,6 +87,7 @@ parts =
     zopepy
     precompiler
     setpermissions
+    update_contributions
 
 
 {% if instance_config.plone_sources %}
@@ -208,6 +214,11 @@ recipe = plone.recipe.precompiler
 eggs = ${buildout:eggs}
 compile-mo-files = true
 extra-paths = ${buildout:directory}/products
+
+
+[update_contributions]
+recipe = zc.recipe.egg:scripts
+eggs = ploneorg.core
 
 
 [versions]
